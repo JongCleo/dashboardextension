@@ -1,7 +1,7 @@
-let express = require('express');
-let app = express();
-//var router = require('./routes/routes.js');
-let path = require('path');
+let express = require('express')
+let app = express()
+let userRoute = require('./routes/user')
+let path = require('path')
 let mongoose = require('mongoose')
 let bodyParser = require('body-parser')
 require('dotenv').config()
@@ -15,16 +15,14 @@ mongoose.connect(`mongodb://${user}:${password}@${server}/${database}`, { useNew
 
 app.use(bodyParser.json())
 
-app.set()
-
-
 //logger
 app.use((req, res, next) => {
-  console.log(`${new.Date().toString()} => ${req.originalUrl}`, req.body)
+  console.log(`${new Date().toString()} => ${req.originalUrl}`, req.body)
   next()
 })
 
 //absorb routes
+app.use(userRoute)
 app.use(express.static('public'))
 
 // Handler for 404 resource not found
