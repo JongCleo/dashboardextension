@@ -5,15 +5,13 @@ let path = require('path')
 let mongoose = require('mongoose')
 let bodyParser = require('body-parser')
 require('dotenv').config()
+
+//connect to DB
 const server = process.env.DB_SERVER
 const database = process.env.DB_DB
 const user = process.env.DB_USER
 const password = process.env.DB_PASS
-
-//connect to DB
 mongoose.connect(`mongodb://${user}:${password}@${server}/${database}`, { useNewUrlParser: true })
-
-app.use(bodyParser.json())
 
 //logger
 app.use((req, res, next) => {
@@ -21,7 +19,8 @@ app.use((req, res, next) => {
   next()
 })
 
-//absorb routes
+// Middleware
+app.use(bodyParser.json())
 app.use(userRoute)
 app.use(express.static('public'))
 

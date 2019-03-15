@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
+import Navbar from './components/Navbar'
+
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    var today = new Date(),
+      date = today.toLocaleString('en-us', { month: 'long' }) + " " + today.getDate() + " " + today.getFullYear();
+
+    this.state = {
+      currentdate: date
+    }
+  }
   render() {
     return (
-      <div className = "logged-out">
-        <h1 className = "title" > Dash Extension </h1>
-        <h2> Improve your life with data! </h2>
 
-        <div className = "btn-container">
-          <button className = "signup-btn">Sign Up</button>
-          <button className = "login-btn">Log In</button>
+      <div className = "wrapper">
+        <Navbar />
+
+        <div className = "main">
         </div>
-
       </div>
     );
   }

@@ -12,31 +12,30 @@ let UserSchema = new mongoose.Schema(
     // provider_id: String,
     // token: String,
     metric_system: Boolean,
-    ProductivityData: [
+    //something for order of graphs
+    graph_order: [
       {
-        date: Date,
-        productive_time: Number,//minutes
-        neutral_time: Number,//minutes
-        distracted_time: Number,//minutes
+        graph_name: String
       }
     ],
-    FinanceData: [
+    productivity: [
       {
-        date: Date,
-        category: Number,//minutes
-        spend: Number,//minutes
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ProductivityDay'
       }
     ],
-    MeditationData: [
+    finance: [
       {
-        date: Date,
-        meditation_time: Number,//minutes
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'FinanceDay'
+      }
+    ],
+    meditation: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'MeditationDay'
       }
     ]
-    // ProductivityData: [
-    //   {
-    //   }
-    // ]
   }
 );
 
