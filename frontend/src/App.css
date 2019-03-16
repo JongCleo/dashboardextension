@@ -2,12 +2,11 @@
 .wrapper {
   display: flex;
   min-height: 100vh;
-  font-size: calc(10px + 2vmin);
-  background-color: #F0F0F0;
-  flex-direction:column;
+  background-color: #fafafa;
+  flex-direction: column;
 }
 
-.nav, .main{
+.nav, .grid{
   display: flex;
   flex-direction: row;
 }

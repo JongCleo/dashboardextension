@@ -19,15 +19,17 @@ class Navbar extends Component {
     return(
       <div className = "nav">
 
-        <div className = "datepicker">
-          <FaChevronCircleLeft className ="chevron"/>
-          <span className ="datepicker-item">{this.state.currentdate}</span>
-          <FaRegCalendarAlt className ="datepicker-item" />
-          <FaChevronCircleRight className ="chevron" />
+        <div className = "vertical-center">
+          <FaChevronCircleLeft className ="nav-item clickable"/>
+          <div className ="vertical-center clickable">
+            <span>{this.state.currentdate}</span>
+            <FaRegCalendarAlt className="calendar"/>
+          </div>
+          <FaChevronCircleRight className ="nav-item clickable" />
         </div>
 
-        <div className = "settings">
-          <FaCog />
+        <div className = "vertical-center clickable">
+          <FaCog className="nav-item"/>
           <span> Settings </span>
         </div>
       </div>

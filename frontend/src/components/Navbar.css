@@ -1,14 +1,25 @@
 .nav {
   background-color: white;
-  padding: 1% 1% 1% 1%;
+  padding: 1% 2%;
+  justify-content: space-between;
+  color: #696969;
+  font-size: 20px;
 }
 
-.nav .datepicker{
+.vertical-center {
   display: flex;
-  justify-content: space-around;
-  padding: 1%
+  align-items: center;
 }
 
-.nav .datepicker .chevron {
+.nav-item {
+  margin: 0px 5px;
+}
 
+.calendar{
+  margin: 0px 0px 0px 5px;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
