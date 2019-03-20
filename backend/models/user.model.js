@@ -18,26 +18,24 @@ let UserSchema = new mongoose.Schema(
         graph_name: String
       }
     ],
-    productivity: [
+    productivity: {
+      api_key: String,
+      data: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Productivity'
+        }
+      ]
+    },
+    fitness: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ProductivityDay'
-      }
-    ],
-    finance: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'FinanceDay'
-      }
-    ],
-    meditation: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'MeditationDay'
+        ref: 'Fitness'
       }
     ]
   }
 );
+
 
 // UserSchema.methods.follow = function(user_id) {
 //   if (this.following.indexOf(user_id) === -1){
