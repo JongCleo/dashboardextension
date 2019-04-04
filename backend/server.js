@@ -1,9 +1,12 @@
 let express = require('express')
 let app = express()
-let userRoute = require('./routes/user')
 let path = require('path')
 let mongoose = require('mongoose')
 let bodyParser = require('body-parser')
+
+let userRoute = require('./routes/user.routes')
+let productivityRoute = require('./routes/productivity.routes')
+
 require('dotenv').config()
 
 //connect to DB
@@ -21,8 +24,9 @@ app.use((req, res, next) => {
 
 // Middleware
 app.use(bodyParser.json())
-app.use(userRoute)
 app.use(express.static('public'))
+app.use(userRoute)
+app.use(productivityRoute)
 
 // Handler for 404 resource not found
 app.use((req, res, next) => {

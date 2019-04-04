@@ -4,45 +4,6 @@ let express = require('express')
 let router = express.Router()
 let request = require('request')
 let moment = require('moment')
-// New app sign up, create User
-
-router.post('/user', (req, res) => {
-  if (!req.body) {
-    return res.status(400).send('Request body is missing')
-  }
-
-  // does mongo check for dupes?
-  let model = new UserModel(req.body)
-  model.save()
-    .then(doc => {
-      if(!doc || doc.length === 0){
-        return res.status(500).send(doc)
-      }
-
-      res.status(201).send(doc)
-    })
-    .catch(err => {
-      res.status(500).json(err)
-    })
-})
-
-// options screen, Get User details
-router.get('/user', (req, res) => {
-  if(!req.query.email) {
-    return res.status(400).send("Missing URL param: email")
-  }
-
-  UserModel.findOne({
-    email: req.query.email
-  })
-  .then (doc => {
-    res.json(doc)
-  })
-  .catch (err=> {
-    res.stats(500).json(err)
-  })
-})
-
 
 
 router.get('/productivity', (req, res) => {
@@ -61,6 +22,7 @@ router.get('/productivity', (req, res) => {
     res.json(document)
   })
 })
+
 // first time connect Rescue Time
 router.post('/productivity', (req, res) => {
   if (!req.body) {
@@ -75,9 +37,18 @@ router.post('/productivity', (req, res) => {
     JSON.parse(body).forEach(function(item) {
       corrected_data.push({
         date: item.date,
-        productive_time: (item.productive_hours + item.very_productive_hours).toFixed(2),
-        neutral_time: (item.neutral_hours).toFixed(2),
-        distracted_time: (item.very_distracting_hours + item.distracting_hours).toFixed(2)
+        snapshot: [{
+          label: "productive_time",
+          value: (item.productive_hours + item.very_productive_hours).toFixed(2)
+        },
+        {
+          label: "neutral_time",
+          value: (item.neutral_hours).toFixed(2),
+        },
+        {
+          label: "distracted_time",
+          value: (item.very_distracting_hours + item.distracting_hours).toFixed(2)
+        }]
       })
     })
 
@@ -94,6 +65,9 @@ router.post('/productivity', (req, res) => {
             "productivity.api_key": req.body.api_key
           },
           "$push": {
+            "graph_order": {
+              "graph_name":"productivity"
+            },
             "productivity.data": {
               "$each" : just_object_ids
             }
@@ -108,20 +82,5 @@ router.post('/productivity', (req, res) => {
       })
     })//end request
   })
-
-
-
-  /*
-  // parse JSON object,
-  // find the appropriate user
-  // add to the graph_order
-  // for each entry in reverse order?, populate histry, let date be the unique key
-  */
-
-
-// delete a service connection
-
-// get active services @ this date + the grid order
-
 
 module.exports = router
