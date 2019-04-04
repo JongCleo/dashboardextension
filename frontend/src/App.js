@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
+
+import config from './credentials.json'
 import './App.css';
 import Navbar from './components/Navbar';
 import Grid from './components/Grid';
-import { GoogleLogin } from 'react-google-login';
-import axios from 'axios';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -35,9 +39,8 @@ class App extends Component {
   componentDidMount(){
     const email = "email@email.com"
     const date = new Date(this.state.currentdate)
-    console.log('http://localhost:4000/productivity?email='+email+'&date='
-    +this.formatDate(date))
-    axios.get('http://localhost:4000/productivity?email='+email+'&date='
+
+    axios.get('/4000/productivity?email='+email+'&date='
     +this.formatDate(date),{ crossdomain: true })
     .then(res=> {
       const productivity = res.data;
@@ -66,7 +69,7 @@ class App extends Component {
     else {
       return (
         <GoogleLogin
-          clientId="315399120884-o8eqkn6tr7r677uhr4m24od0astsrr5k.apps.googleusercontent.com"
+          clientId={config.web.client_id}
           onSuccess={this.succeedLogin()}
           onFailure={this.failLogin()}
         >

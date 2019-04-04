@@ -4,7 +4,7 @@ let express = require('express')
 let router = express.Router()
 
 // New app sign up, create User
-router.post('/user/create', (req, res) => {
+router.post('api/user/create', (req, res) => {
   if (!req.body) {
     return res.status(400).send('Request body is missing')
   }
