@@ -5,7 +5,6 @@ let mongoose = require('mongoose')
 let bodyParser = require('body-parser')
 
 let userRoute = require('./routes/user.routes')
-let productivityRoute = require('./routes/productivity.routes')
 
 require('dotenv').config()
 
@@ -26,7 +25,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json())
 app.use(express.static('public'))
 app.use(userRoute)
-app.use(productivityRoute)
 
 // Handler for 404 resource not found
 app.use((req, res, next) => {
