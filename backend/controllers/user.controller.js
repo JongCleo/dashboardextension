@@ -2,7 +2,7 @@ let UserModel = require('../models/user.model')
 
 ////////////////////////////////////////////////// CREATE user on new app signup
 exports.user_create = function(req, res) {
-  console.log('ohyeah')
+
   if (!req.body) {
     return res.status(400).send('Request body is missing')
   }
@@ -97,4 +97,9 @@ exports.dashboard_data_get = function(req, res) {
 
     res.send(response)
   })
+}
+
+//////////////////////////////////////////////// DELETE a dashboard
+exports.dashboard_delete = function(req, res) {
+  res.send("NOT yet implemented");
 }

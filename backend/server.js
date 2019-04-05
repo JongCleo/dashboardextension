@@ -3,9 +3,10 @@ let app = express()
 let path = require('path')
 let mongoose = require('mongoose')
 let bodyParser = require('body-parser')
+let passport = require('passport')
 
 let userRoute = require('./routes/user.routes')
-
+//todo: import auth route, app.use(passport.initialize())
 require('dotenv').config()
 
 //connect to DB

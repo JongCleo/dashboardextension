@@ -8,10 +8,13 @@ let productivity_controller = require('../controllers/productivity.controller');
 router.post('/api/user/create', user_controller.user_create);
 
 // GET user settings
-router.get('/api/user/settings/', user_controller.user_settings_get);
+router.get('/api/user/settings', user_controller.user_settings_get);
 
 // GET all dashboard Data
 router.get('/api/user/alldata', user_controller.dashboard_data_get);
+
+// DELETE a dashboard
+router.delete('/api/user/dashboard/delete', user_controller.dashboard_delete);
 
 // CREATE productivity dash data
 router.post('/api/user/productivity/create', productivity_controller.productivity_create);
