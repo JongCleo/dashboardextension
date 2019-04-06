@@ -27,12 +27,15 @@ let UserSchema = new mongoose.Schema(
         }
       ]
     },
-    fitness: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Fitness'
-      }
-    ]
+    sleep: {
+      token: String,
+      data: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Sleep'
+        }
+      ]
+    }
   }
 );
 
