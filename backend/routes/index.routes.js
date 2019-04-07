@@ -14,7 +14,7 @@ router.post('/api/user/create', user_controller.user_create);
 // GET all dashboard Data
 router.get('/api/user/alldata', user_controller.dashboard_data_get);
 
-router.get('/settings', settings_controller.show_page);
+router.get('/settings', user_controller.show_page);
 
 //////////////////////////////////////////////// PRODUCTIVITY
 

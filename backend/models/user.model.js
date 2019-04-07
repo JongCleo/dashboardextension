@@ -36,15 +36,51 @@ let UserSchema = new mongoose.Schema(
         }
       ]
     },
-    habits: {
+    korean: {
       token: String,
       data: [
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Habit'
+          ref: 'Korean'
         }
       ]
-    }
+    },
+    meditate: {
+      token: String,
+      data: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Meditate'
+        }
+      ]
+    },
+    exercise: {
+      token: String,
+      data: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Exercise'
+        }
+      ]
+    },
+    fasting: {
+      token: String,
+      data: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Fasting'
+        }
+      ]
+    },
+    drumming: {
+      token: String,
+      data: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Drumming'
+        }
+      ]
+    },
   }
 );
 

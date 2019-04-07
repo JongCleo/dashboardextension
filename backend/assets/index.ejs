@@ -21,7 +21,7 @@
           <p class="description"> Imports sleep data.</p>
           <% if (typeof sleep != 'undefined'){ %>
             <div class="button_cont" align="center">
-              <a class="btn btn-disconnect" href="/fitbit/delete" target="_blank">
+              <a class="btn btn-disconnect" href="/fitbit/delete">
               Disconnect</a>
             </div>
 
@@ -42,7 +42,7 @@
           <p class="description"> Imports neutral, disracting and productive hours.</p>
           <% if (typeof productivity != 'undefined'){ %>
             <div class="button_cont" align="center">
-              <a class="btn btn-disconnect" href="/productivity/delete" target="_blank">
+              <a class="btn btn-disconnect" href="/productivity/delete">
               Disconnect</a>
             </div>
 
@@ -62,15 +62,15 @@
         <div style="padding-left:20px"class="description-box">
           <span>Google Sheets</span>
           <p class="description"> Imports manual logged habit data.</p>
-          <% if (typeof habits != 'undefined'){ %>
+          <% if (typeof drumming != 'undefined'){ %>
             <div class="button_cont" align="center">
-              <a class="btn btn-disconnect" href="" target="_blank">
+              <a class="btn btn-disconnect" href="/habits/delete">
               Disconnect</a>
             </div>
 
           <% } else { %>
             <div class="button_cont" align="center">
-              <a class="btn btn-connect" href="" target="_blank">
+              <a class="btn btn-connect" href="/auth/habits/authorize">
               Connect</a>
             </div>
           <% } %>
