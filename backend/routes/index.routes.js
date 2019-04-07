@@ -26,7 +26,7 @@ router.delete('/api/user/dashboard/delete', user_controller.dashboard_delete);
 //////////////////////////////////////////////// PRODUCTIVITY
 
 // CREATE productivity dash data
-router.post('/auth/productivity/authorize', productivity_controller.productivity_create);
+router.get('/auth/productivity/authorize', productivity_controller.productivity_create);
 
 //////////////////////////////////////////////// SLEEP
 // GET sleep auth page

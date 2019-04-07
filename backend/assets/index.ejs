@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href='styles.css'>
+  <title>Settings Page</title>
+</head>
+<body class="container">
+
+  <div class="wrapper">
+    <div>
+      <h1> BirdsEye New Tab - Settings </h1>
+      <h4> Welcome <%= name %>! Add/remove a data source:</h2>
+    </div>
+    <div class="cards">
+      <div class="card-item">
+        <div class="imgparent">
+          <img class="logo" src="fitbit.png">
+        </div>
+        <div class="description-box">
+          <span>Fitbit</span>
+          <p class="description"> Imports sleep data.</p>
+          <% if (typeof sleep != 'undefined'){ %>
+            <div class="button_cont" align="center">
+              <a class="btn btn-disconnect" href="" target="_blank">
+              Disconnect</a>
+            </div>
+
+          <% } else { %>
+            <div class="button_cont" align="center">
+              <a class="btn btn-connect" href="/auth/fitbit/authorize">
+              Connect</a>
+            </div>
+          <% } %>
+        </div>
+      </div>
+      <div class="card-item">
+        <div class="imgparent">
+          <img class="logo" src="rescuetime.png">
+        </div>
+        <div class="description-box">
+          <span>Rescue Time</span>
+          <p class="description"> Imports neutral, disracting and productive hours.</p>
+          <% if (typeof productivity != 'undefined'){ %>
+            <div class="button_cont" align="center">
+              <a class="btn btn-disconnect" href="" target="_blank">
+              Disconnect</a>
+            </div>
+
+          <% } else { %>
+            <div class="button_cont" align="center">
+              <a class="btn btn-connect" href="/auth/productivity/authorize">
+              Connect</a>
+            </div>
+          <% } %>
+
+        </div>
+      </div>
+      <div class="card-item">
+        <div style="width:60px; padding-left:15px" class="imgparent">
+          <img class="logo" src="sheets.png">
+        </div>
+        <div style="padding-left:20px"class="description-box">
+          <span>Google Sheets</span>
+          <p class="description"> Imports manual logged habit data.</p>
+          <% if (typeof habits != 'undefined'){ %>
+            <div class="button_cont" align="center">
+              <a class="btn btn-disconnect" href="" target="_blank">
+              Disconnect</a>
+            </div>
+
+          <% } else { %>
+            <div class="button_cont" align="center">
+              <a class="btn btn-connect" href="" target="_blank">
+              Connect</a>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

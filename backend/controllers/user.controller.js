@@ -60,7 +60,7 @@ exports.dashboard_data_get = function(req, res) {
     path: 'productivity.data',
     match : { date: req.query.date}
   })
-  .select("graph_order productivity.data")
+  .select("graph_order productivity.data sleep.data")
   .exec(function(error, document) {
     if (document != null){
       var n = document.graph_order.length;

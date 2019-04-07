@@ -3,11 +3,10 @@ import './Grid.css';
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const graphDrawer = (props) => {
-  console.log(props)
+  
   if(props.graph_type === "productivity"){
     const COLORS = ['#00C49F', '#F08080', '#FFBB28'];
     return(
-
       <ResponsiveContainer className="graphContainer" width='80%' height="80%">
         <BarChart data={props.data[0].snapshot}>
           <CartesianGrid strokeDasharray="3 3" />

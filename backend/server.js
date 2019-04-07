@@ -18,6 +18,8 @@ const password = process.env.DB_PASS
 mongoose.connect(`mongodb://${user}:${password}@${server}/${database}`, { useNewUrlParser: true })
 
 ////////////////////////////// Middleware
+
+app.set('view engine', 'ejs');
 app.use(express.static('assets'))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())

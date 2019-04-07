@@ -1,6 +1,98 @@
-.wrapper {
+@font-face {
+	  font-family: "San Francisco";
+	  font-weight: 100;
+	  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff"); }
+	/** Thin */
+	@font-face {
+	  font-family: "San Francisco";
+	  font-weight: 200;
+	  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff"); }
+	/** Regular */
+	@font-face {
+	  font-family: "San Francisco";
+	  font-weight: 400;
+	  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff"); }
+	/** Medium */
+	@font-face {
+	  font-family: "San Francisco";
+	  font-weight: 500;
+	  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff"); }
+	/** Semi Bold */
+	@font-face {
+	  font-family: "San Francisco";
+	  font-weight: 600;
+	  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff"); }
+	/** Bold */
+	@font-face {
+	  font-family: "San Francisco";
+	  font-weight: 700;
+	  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff"); }
+
+body {
   background-color: #fafafa;
-  min-height: 100vh;
-  display:flex;
-  flex-direction: column;
+  margin: 0;
+  font-family: 'San Francisco', sans-serif;
 }
+.wrapper {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  height: 650px;
+  margin: 60px auto 0 auto;
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;
+}
+
+  .wrapper .cards {
+    display: flex;
+    flex-direction: column;
+  }
+    .cards .card-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 15px;
+      -moz-box-shadow:    3px 3px 5px 6px #ccc;
+      -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+      box-shadow:         3px 3px 5px 6px #ccc;
+      margin-top:15px;
+      margin-bottom:15px;
+    }
+    .cards .card-item .imgparent{
+      width: 100px;
+    }
+      .cards .card-item .imgparent img{
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    .cards .card-item .description-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      margin-left: 15px;
+    }
+    .cards .card-item .description-box span{
+      font-size: 21px;
+    }
+    .cards .btn {
+      border: none;
+      color: #ffffff !important;
+      text-decoration: none;
+      font-weight: 100;
+      padding: 5px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .cards .btn-connect{
+      background: #2ecc40;
+    }
+    .cards .btn-disconnect{
+      background: #ff4136;
+    }

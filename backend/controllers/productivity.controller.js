@@ -1,6 +1,7 @@
 let UserModel = require('../models/user.model')
 let ProductivityModel = require('../models/productivity.model')
 let request = require('request')
+config = require('../config.json');
 
 // CREATE productivity dash data
 exports.productivity_create = function(req, res) {
@@ -9,7 +10,7 @@ exports.productivity_create = function(req, res) {
   }
 
   // Pull initial batch RT data and properly format
-  request('https://www.rescuetime.com/anapi/daily_summary_feed?key=' + req.body.api_key,
+  request('https://www.rescuetime.com/anapi/daily_summary_feed?key=' + config.RT_API,
   function (error, response, body) {
     var corrected_data = [];
 
@@ -39,11 +40,8 @@ exports.productivity_create = function(req, res) {
       })
 
       UserModel.findOneAndUpdate(
-        {email: req.body.email},
+        {email: req.session.email},
         {
-          "$set": {
-            "productivity.api_key": req.body.api_key
-          },
           "$push": {
             "graph_order": {
               "graph_name":"productivity"
@@ -55,7 +53,7 @@ exports.productivity_create = function(req, res) {
         })
         .then (doc => {
           //return to a page
-          res.json(doc)
+          res.redirect('/settings')
         })
         .catch (err=> {res.stats(500).json(err)})
     })
