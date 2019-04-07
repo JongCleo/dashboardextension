@@ -89,3 +89,24 @@ exports.fitbit_callback = function(req, res) {
 		res.status(err.status).send(err);
 	});
 }
+
+// DELETE sleep dash data
+exports.fitbit_delete = function(req, res) {
+  UserModel.findOneAndUpdate(
+    {email: req.session.email},
+    {
+      "$pull": {
+        "graph_order": {
+          "graph_name":"sleep"
+        }
+      },
+      "$set": {
+        "sleep.data": []
+      }
+    })
+    .then (doc => {
+      //return to a page
+      res.redirect('/settings')
+    })
+    .catch (err=> {res.stats(500).json(err)})
+}

@@ -1,10 +1,10 @@
 let UserModel = require('../models/user.model')
-let ProductivityModel = require('../models/productivity.model')
+let HabitsModel = require('../models/habits.model')
 let request = require('request')
 config = require('../config.json');
 
 // CREATE productivity dash data
-exports.productivity_create = function(req, res) {
+exports.habits_create = function(req, res) {
   if (!req.body) {
     return res.status(400).send('Request body is missing')
   }
@@ -61,22 +61,22 @@ exports.productivity_create = function(req, res) {
 }
 
 // DELETE productivity dash data
-exports.productivity_delete = function(req, res) {
-  UserModel.findOneAndUpdate(
-    {email: req.session.email},
-    {
-      "$pull": {
-        "graph_order": {
-          "graph_name":"productivity"
-        }
-      },
-      "$set": {
-        "productivity.data": []
-      }
-    })
-    .then (doc => {
-      //return to a page
-      res.redirect('/settings')
-    })
-    .catch (err=> {res.stats(500).json(err)})
+exports.habits_delete = function(req, res) {
+  // UserModel.findOneAndUpdate(
+  //   {email: req.session.email},
+  //   {
+  //     "$pull": {
+  //       "graph_order": {
+  //         "graph_name":"productivity"
+  //       }
+  //     },
+  //     "$set": {
+  //       "productivity.data": []
+  //     }
+  //   })
+  //   .then (doc => {
+  //     //return to a page
+  //     res.redirect('/settings')
+  //   })
+  //   .catch (err=> {res.stats(500).json(err)})
 }

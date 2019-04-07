@@ -1,4 +1,5 @@
 let UserModel = require('../models/user.model')
+let path = require('path')
 
 ////////////////////////////////////////////////// CREATE user on new app signup
 exports.user_create = function(req, res) {
@@ -60,6 +61,10 @@ exports.dashboard_data_get = function(req, res) {
     path: 'productivity.data',
     match : { date: req.query.date}
   })
+  .populate({
+    path: 'sleep.data',
+    match : { date: req.query.date}
+  })
   .select("graph_order productivity.data sleep.data")
   .exec(function(error, document) {
     if (document != null){
@@ -79,7 +84,29 @@ exports.dashboard_data_get = function(req, res) {
   })
 }
 
-//////////////////////////////////////////////// DELETE a dashboard
-exports.dashboard_delete = function(req, res) {
-  res.send("NOT yet implemented");
+//////////////////////////////////////////////// Settings page
+exports.show_page = function(req, res) {
+
+  //check cookies or request param
+  // grab service availabilites
+  // render page
+
+  UserModel.findOne({
+    email: req.session.email
+  })
+  .select("name graph_order")
+  .exec(function(error, document) {
+    if(document != null) {
+      var fields = {
+        name: document.name.split(' ')[0]
+      };
+
+      for (var i = 0; i < document.graph_order.length; i++) {
+        fields[document.graph_order[i].graph_name] = true
+      }
+
+      res.render(path.join(__dirname,'../assets','index.ejs'),fields)
+    }
+  })
+
 }
