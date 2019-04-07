@@ -7,7 +7,7 @@ import config from './credentials.json'
 import './App.css';
 import Navbar from './components/Navbar';
 import Grid from './components/Grid';
-
+axios.defaults.withCredentials = true;
 
 
 class App extends Component {
@@ -18,64 +18,63 @@ class App extends Component {
       date = today.toLocaleString('en-us', { month: 'long' }) + " " + today.getDate() + " " + today.getFullYear();
 
     this.state = {
-      currentdate: date,
-      loggedIn: ls.get('loggedIn') || false
+      currentDate: date,
+      loggedIn: ls.get('loggedIn') || false,
+      dashData: []
     }
 
   }
 
-  formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
-
   componentDidMount(){
-    // const email = "email@email.com"
-    // const date = new Date(this.state.currentdate)
-    //
-    // axios.get('/4000/productivity?email='+email+'&date='
-    // +this.formatDate(date),{ crossdomain: true })
-    // .then(res=> {
-    //   const productivity = res.data;
-    //   this.setState({productivity: productivity})
-    // })
-    // console.log(this.state.productivity)
-  }
+    console.log(this.state.loggedIn)
+    if(this.state.loggedIn){
 
-  succeedLogin = (response) => {
-    //create user if not exist
-    //else update credential?
-    this.setState({loggedIn: true})
-    ls.set('loggedIn', true)
-  }
-  failLogin = (response) => {
-    console.log(response);
+      axios.get('http://localhost:4000/api/user/alldata?date='
+      +formatDate(this.state.currentDate))
+      .then(res=> {
+        console.log("component did mout:"+res)
+        this.setState({dashData: res.data})
+      })
+    }
   }
 
   renderContent(){
 
     if(this.state.loggedIn){
+      console.log(this.state.dashData)
       return(
         <div className = "wrapper">
           <Navbar />
-          <Grid />
+          <Grid
+            dashData={this.state.dashData}/>
         </div>
       )
     }
     else {
+      const succeedLogin = (response) => {
+        axios.post('http://localhost:4000/api/user/create',{
+          email: response.profileObj.email,
+          name: response.profileObj.givenName + " "+ response.profileObj.familyName
+        }).then((res) => {
+          this.setState({
+            loggedIn: true,
+            dashData: res.data
+          })
+          ls.set('loggedIn', true)
+        })
+
+      }
+      const failLogin = (response) => {
+        console.log(response);
+      }
       return (
+
         <div className = "wrapper">
+
           <GoogleLogin
             clientId={config.web.client_id}
-            onSuccess={() => this.succeedLogin()}
-            onFailure={() => this.failLogin()}
+            onSuccess={succeedLogin}
+            onFailure={failLogin}
           >
             <span> Login with Google</span>
           </GoogleLogin>
@@ -88,6 +87,19 @@ class App extends Component {
       this.renderContent()
     );
   }
+}
+
+
+function formatDate(date) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + (d.getDate()-1),
+      year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-');
 }
 
 export default App;

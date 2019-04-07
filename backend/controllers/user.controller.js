@@ -7,17 +7,28 @@ exports.user_create = function(req, res) {
     return res.status(400).send('Request body is missing')
   }
 
-  // does mongo check for dupes?
+  var d = new Date(),
+      month = '' + (d.getMonth() + 1),
+      day = '' + (d.getDate()-1),
+      year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+  req.session.email = req.body.email
+  req.session.name = req.body.name
+
   let model = new UserModel(req.body)
   model.save()
     .then(doc => {
       if(!doc || doc.length === 0) {
         return res.status(500).send(doc)
       }
-      res.status(201).send(doc)
+
+      res.redirect("/api/user/alldata"+"?date="+[year, month, day].join('-'))
     })
     .catch(err => {
-      res.status(500).json(err)
+
+      res.redirect("/api/user/alldata"+"?date="+[year, month, day].join('-'))
     })
 }
 
@@ -42,60 +53,29 @@ exports.user_settings_get = function(req, res) {
 
 //////////////////////////////////////////////// GET all dashboard data
 exports.dashboard_data_get = function(req, res) {
-  /*
-  {
-    graphs : [
-    {
-      graph_type: "productivity".
-      data: [
-      {
-        label: "productive_time":
-        value: "10"
-      },
-      {
-        label: "neutral_time",
-        value: "5"
-      }
-      ]
-    },
-    {
-      graph_type: "fitness".
-      data: [
-      {
-        label: "productive_time":
-        value: "10"
-      },
-      {
-        label: "neutral_time",
-        value: "5"
-      }
-      ]
-    }
-
-  ]
-
-  }
-  */
   UserModel.findOne({
-    email: req.query.email
+    email: req.session.email
   })
   .populate({
     path: 'productivity.data',
-    match : { date: req.query.date }
+    match : { date: req.query.date}
   })
   .select("graph_order productivity.data")
   .exec(function(error, document) {
-
-    var n = document.graph_order.length;
-    var response = [];
-    for (var i = 0; i < n; i++) {
-        response.push({
-          graph_type: document.graph_order[i].graph_name,
-          data: document[document.graph_order[i].graph_name].data
-        })
+    if (document != null){
+      var n = document.graph_order.length;
+      var response = [];
+      for (var i = 0; i < n; i++) {
+          response.push({
+            graph_type: document.graph_order[i].graph_name,
+            data: document[document.graph_order[i].graph_name].data
+          })
+      }
+      res.send(response)
     }
-
-    res.send(response)
+    else {
+      res.send("nothing!")
+    }
   })
 }
 

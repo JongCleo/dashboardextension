@@ -11,8 +11,8 @@ exports.fitbit_authorize = function(req, res) {
 }
 
 exports.fitbit_callback = function(req, res) {
-  console.log('madeit')
   // exchange the authorization code we just received for an access token
+	console.log(req.session.email)
 	fitclient.getAccessToken(req.query.code, 'http://localhost:4000/fitbit/callback').then(result => {
 		// use the access token to fetch the user's profile information
 		fitclient.get("/profile.json", result.access_token).then(results => {

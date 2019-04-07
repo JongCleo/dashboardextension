@@ -1,11 +1,12 @@
 let express = require('express')
 let app = express()
-let path = require('path')
 let mongoose = require('mongoose')
 let bodyParser = require('body-parser')
+let session = require("express-session")
+let cors = require('cors')
+let cookieParser = require('cookie-parser')
+let routes = require('./routes/index.routes')
 
-let userRoute = require('./routes/user.routes')
-let authRoute = require('./routes/auth.routes')
 
 require('dotenv').config()
 
@@ -17,9 +18,16 @@ const password = process.env.DB_PASS
 mongoose.connect(`mongodb://${user}:${password}@${server}/${database}`, { useNewUrlParser: true })
 
 ////////////////////////////// Middleware
+app.use(express.static('assets'))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
-app.use(express.static('public'))
+app.use(cookieParser())
+app.use(session({ secret:"birdseye", resave:false, saveUninitalized: true}))
+app.use(cors({
+    origin:['http://localhost:3000'],
+    methods:['GET','POST'],
+    credentials: true // enable set cookie
+}));
 
 ////////////////////////////// Routes
 app.use((req, res, next) => {
@@ -27,8 +35,7 @@ app.use((req, res, next) => {
   next()
 });
 
-app.use(userRoute)
-app.use(authRoute)
+app.use(routes)
 
 app.use((req, res, next) => {
   res.status(404).send('404, We think you are lost')

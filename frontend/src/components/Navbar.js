@@ -30,7 +30,7 @@ class Navbar extends Component {
 
         <div className = "vertical-center clickable">
           <FaCog className="nav-item"/>
-          <span> Settings </span>
+          <span> <a href={"localhost:4000/settings"+"?email="+"leonardkim96@gmail.com"}> Settings </a></span>
         </div>
       </div>
     )

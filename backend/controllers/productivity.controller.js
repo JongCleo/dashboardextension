@@ -53,7 +53,10 @@ exports.productivity_create = function(req, res) {
             }
           }
         })
-        .then (doc => {res.json(doc)})
+        .then (doc => {
+          //return to a page
+          res.json(doc)
+        })
         .catch (err=> {res.stats(500).json(err)})
     })
   })

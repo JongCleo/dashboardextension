@@ -19,7 +19,7 @@ let UserSchema = new mongoose.Schema(
       }
     ],
     productivity: {
-      api_key: String,
+      token: String,
       data: [
         {
           type: mongoose.Schema.Types.ObjectId,
@@ -33,6 +33,15 @@ let UserSchema = new mongoose.Schema(
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Sleep'
+        }
+      ]
+    },
+    habits: {
+      token: String,
+      data: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Habit'
         }
       ]
     }
