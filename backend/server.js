@@ -26,7 +26,7 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(session({ secret:"birdseye", resave:false, saveUninitalized: true}))
 app.use(cors({
-    origin:['http://localhost:3000'],
+    origin:['http://localhost:3000','chrome-extension://hhchipiahegcjkofojldbcnnighmpegp'],
     methods:['GET','POST'],
     credentials: true // enable set cookie
 }));

@@ -41,8 +41,7 @@ class App extends Component {
 
       axios.get('http://localhost:4000/api/user/alldata?date='
       +formatDate(this.state.currentDate))
-      .then(res=> {
-        console.log("component did mout:"+res)
+      .then(res=> {  
         this.setState({dashData: res.data})
       })
     }
