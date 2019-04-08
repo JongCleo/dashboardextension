@@ -54,6 +54,16 @@ exports.user_settings_get = function(req, res) {
 
 //////////////////////////////////////////////// GET all dashboard data
 exports.dashboard_data_get = function(req, res) {
+  var fourWeeksBack = new Date(req.query.date)
+  fourWeeksBack = new Date(fourWeeksBack.setDate(fourWeeksBack.getDate()-28))
+  var month = '' + (fourWeeksBack.getMonth() + 1),
+      day = '' + (fourWeeksBack.getDate()-1),
+      year = fourWeeksBack.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+  fourWeeksBack = [year, month, day].join('-')
+
   UserModel.findOne({
     email: req.session.email
   })
@@ -65,7 +75,42 @@ exports.dashboard_data_get = function(req, res) {
     path: 'sleep.data',
     match : { date: req.query.date}
   })
-  .select("graph_order productivity.data sleep.data")
+  .populate({
+    path: 'drumming.data',
+    match : { date: {
+      $gt: fourWeeksBack,
+      $lt: req.query.date
+    }}
+  })
+  .populate({
+    path: 'exercise.data',
+    match : { date: {
+      $gt: fourWeeksBack,
+      $lt: req.query.date
+    }}
+  })
+  .populate({
+    path: 'fasting.data',
+    match : { date: {
+      $gt: fourWeeksBack,
+      $lt: req.query.date
+    }}
+  })
+  .populate({
+    path: 'korean.data',
+    match : { date: {
+      $gt: fourWeeksBack,
+      $lt: req.query.date
+    }}
+  })
+  .populate({
+    path: 'meditate.data',
+    match : { date: {
+      $gt: fourWeeksBack,
+      $lt: req.query.date
+    }}
+  })
+  .select("graph_order productivity.data sleep.data drumming.data exercise.data fasting.data korean.data meditate.data")
   .exec(function(error, document) {
     if (document != null){
       var n = document.graph_order.length;

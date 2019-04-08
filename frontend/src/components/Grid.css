@@ -1,16 +1,19 @@
 .grid {
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: space-around;
+  align-items: flex-start;
   padding-top:30px;
 }
 
 .grid-item {
   /*flex: 1 0 45%;*/
   margin: 1% 0%;
-  width: 30%;
-  height: 350px;
+  width: 23%;
+  height: 310px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   background-color: white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -19,7 +22,30 @@
 .grid-item:hover{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
-
-.graphContainer {
-  margin-left: 7%;
+.graphContainer{
+  margin-right:30px;
 }
+.titlebox {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  align-self:flex-start;
+  margin-left:50px;
+  margin-bottom:10px;
+}
+.titlebox span{
+  text-transform: capitalize;
+}
+.imgparent{
+  width: 45px;
+  margin-right:10px;
+}
+.sheets {
+  width: 25px;
+  margin-right:10px;
+}
+.imgparent img, .sheets img{
+    display: block;
+    width: 100%;
+    height: auto;
+  }

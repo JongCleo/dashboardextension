@@ -26,7 +26,6 @@ class App extends Component {
   }
 
   componentDidMount(){
-    console.log(this.state.loggedIn)
     if(this.state.loggedIn){
 
       axios.get('http://localhost:4000/api/user/alldata?date='

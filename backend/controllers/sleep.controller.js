@@ -23,38 +23,38 @@ exports.fitbit_callback = function(req, res) {
 					date: "2019-04-06",
 					snapshot: [{
 						label: "deep",
-						value: 86
+						value: 1.43
 					},
 					{
 						label: "light",
-						value: 233
+						value: 3.88
 					},
 					{
 						label: "rem",
-						value: 95
+						value: 1.58
 					},
 					{
 						label: "wake",
-						value: 28
+						value: 0.46
 					}]
 				},
 				{
 					date: "2019-04-07",
 					snapshot: [{
 						label: "deep",
-						value: 65
+						value: 1.08
 					},
 					{
 						label: "light",
-						value: 243
+						value: 4.05
 					},
 					{
 						label: "rem",
-						value: 85
+						value: 1.42
 					},
 					{
 						label: "wake",
-						value: 15
+						value: 0.25
 					}]
 				},
 		];
