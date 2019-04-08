@@ -16,7 +16,8 @@ class App extends Component {
     var today = new Date(),
       date = today.toLocaleString('en-us', { month: 'long' }) + " " + today.getDate() + " " + today.getFullYear();
 
-    this.handleLoginChange = this.handleLoginChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogin.bind(this);
     this.state = {
       currentDate: date,
       loggedIn: ls.get('loggedIn') || false,
@@ -24,10 +25,15 @@ class App extends Component {
     }
 
   }
-  handleLoginChange(loggedIn, dashData) {
+  handleLogin(loggedIn, dashData) {
     this.setState({
       loggedIn: loggedIn,
       dashData: dashData
+    })
+  }
+  handleLogout(loggedIn){
+    this.setState({
+      loggedIn: loggedIn
     })
   }
   componentDidMount(){
@@ -47,7 +53,10 @@ class App extends Component {
     if(this.state.loggedIn){
       return(
         <div className = "wrapper">
-          <Navbar />
+          <Navbar
+            onLogoutChange={this.handleLogout}
+            currentDate={this.state.currentDate}
+          />
           <Grid
             dashData={this.state.dashData}/>
         </div>
@@ -56,7 +65,7 @@ class App extends Component {
     else {
       return(
         <LoggedOut
-          onLoginChange={this.handleLoginChange}
+          onLoginChange={this.handleLogin}
         />
       )
     }

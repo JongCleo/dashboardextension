@@ -1,3 +1,8 @@
+body {
+  background-color: #fafafa;
+  margin: 0;
+  font-family: 'San Francisco', sans-serif;
+}
 
 .wrapper {
   display: flex;

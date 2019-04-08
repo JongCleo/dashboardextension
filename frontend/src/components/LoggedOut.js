@@ -3,6 +3,7 @@ import { GoogleLogin } from 'react-google-login';
 import ls from 'local-storage'
 import axios from 'axios';
 import config from '../credentials.json'
+import './LoggedOut.css';
 axios.defaults.withCredentials = true;
 
 class LoggedOut extends Component {
@@ -28,14 +29,21 @@ class LoggedOut extends Component {
     }
     return (
 
-      <div className = "logged-out wrapper">
-        <GoogleLogin
-          clientId={config.web.client_id}
-          onSuccess={succeedLogin}
-          onFailure={failLogin}
-        >
-          <span> Login with Google</span>
-        </GoogleLogin>
+      <div className = "wrapper">
+        <div className = "welcome-card">
+          <div className="logoholder">
+            <img src="./assets/birdseye.png"/>
+          </div>
+          <h1> Birdseye New Tab</h1>
+
+          <GoogleLogin
+            clientId={config.web.client_id}
+            onSuccess={succeedLogin}
+            onFailure={failLogin}
+          >
+            <span> Login with Google</span>
+          </GoogleLogin>
+        </div>
       </div>
     )
   }
