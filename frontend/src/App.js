@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
 import ls from 'local-storage'
 
-import config from './credentials.json'
 import './App.css';
 import Navbar from './components/Navbar';
 import Grid from './components/Grid';
+import LoggedOut from './components/LoggedOut'
 axios.defaults.withCredentials = true;
 
 
@@ -17,6 +16,7 @@ class App extends Component {
     var today = new Date(),
       date = today.toLocaleString('en-us', { month: 'long' }) + " " + today.getDate() + " " + today.getFullYear();
 
+    this.handleLoginChange = this.handleLoginChange.bind(this);
     this.state = {
       currentDate: date,
       loggedIn: ls.get('loggedIn') || false,
@@ -24,7 +24,12 @@ class App extends Component {
     }
 
   }
-
+  handleLoginChange(loggedIn, dashData) {
+    this.setState({
+      loggedIn: loggedIn,
+      dashData: dashData
+    })
+  }
   componentDidMount(){
     if(this.state.loggedIn){
 
@@ -40,7 +45,6 @@ class App extends Component {
   renderContent(){
 
     if(this.state.loggedIn){
-      console.log(this.state.dashData)
       return(
         <div className = "wrapper">
           <Navbar />
@@ -50,34 +54,10 @@ class App extends Component {
       )
     }
     else {
-      const succeedLogin = (response) => {
-        axios.post('http://localhost:4000/api/user/create',{
-          email: response.profileObj.email,
-          name: response.profileObj.givenName + " "+ response.profileObj.familyName
-        }).then((res) => {
-          this.setState({
-            loggedIn: true,
-            dashData: res.data
-          })
-          ls.set('loggedIn', true)
-        })
-
-      }
-      const failLogin = (response) => {
-        console.log(response);
-      }
-      return (
-
-        <div className = "wrapper">
-
-          <GoogleLogin
-            clientId={config.web.client_id}
-            onSuccess={succeedLogin}
-            onFailure={failLogin}
-          >
-            <span> Login with Google</span>
-          </GoogleLogin>
-        </div>
+      return(
+        <LoggedOut
+          onLoginChange={this.handleLoginChange}
+        />
       )
     }
   }

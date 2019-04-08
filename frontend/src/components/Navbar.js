@@ -20,12 +20,13 @@ class Navbar extends Component {
       <div className = "nav">
 
         <div className = "vertical-center">
-          <FaChevronCircleLeft className ="nav-item clickable"/>
+          {/*<FaChevronCircleLeft className ="nav-item clickable"/>*/}
+
           <div className ="vertical-center clickable">
             <span>{this.state.currentdate}</span>
             <FaRegCalendarAlt className="calendar"/>
           </div>
-          <FaChevronCircleRight className ="nav-item clickable" />
+          {/*<FaChevronCircleRight className ="nav-item clickable" />*/}
         </div>
 
         <div className = "vertical-center clickable">

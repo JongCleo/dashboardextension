@@ -5,7 +5,7 @@ import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend,
 var moment = require('moment');
 
 function fixTime(tickItem) {
-  return moment(tickItem).utcOffset("-0500").format('MM-DD')
+  return moment(tickItem).utcOffset(4).format('MM-DD')
 }
 function fixString(tickItem){
   return tickItem.split('_')[0]
@@ -59,7 +59,7 @@ const graphDrawer = (props) => {
         </ ResponsiveContainer>
       )
     default:
-      console.log(props.data)
+      
       return(
         <ResponsiveContainer className="graphContainer" width='90%' height="70%">
           <LineChart data={props.data}>
